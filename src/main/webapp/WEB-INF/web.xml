@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>CodeCrushing</display-name>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>org.omnifaces.CACHE_SETTINGS_APPLICATION_TTL</param-name>
+		<param-value>900</param-value>
+	</context-param>
+	<security-constraint>
+		<display-name>Administration</display-name>
+		<web-resource-collection>
+			<web-resource-name>administration</web-resource-name>
+			<url-pattern>/books/bookForm.xhtml</url-pattern>
+			<url-pattern>/books/bookList.xhtml</url-pattern>
+			<url-pattern>/sysusers/promotion.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>
+				/sysusers/login.xhtml
+			</form-login-page>
+			<form-error-page>
+				/sysusers/login.xhtml
+			</form-error-page>
+		</form-login-config>
+	</login-config>
+</web-app>
+

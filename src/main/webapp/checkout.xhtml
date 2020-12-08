@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition template="template/app_header_nd_footer.xhtml">
+	<ui:define name="body">
+		<section class="infoSection container">
+			<h2 class="infoSection-titulo">Checkout</h2>
+
+			<form method="post" jsf:id="formCheckout">
+				<div class="form-group">
+					<input class="form-control" type="text" autofocus="autofocus"
+						jsf:id="name" placeholder="Nome Completo"
+						jsf:value="#{adminCheckoutBean.user.name}" />
+					<h:message for="name" style="color:red" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="email" placeholder="E-mail"
+						jsf:value="#{adminCheckoutBean.user.email}" jsf:id="email" />
+					<h:message for="email" style="color:red" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="password" placeholder="Senha"
+						jsf:value="#{adminCheckoutBean.user.pass}" jsf:id="pass" />
+					<h:message for="pass" style="color:red" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" autofocus="autofocus"
+						jsf:id="adress" placeholder="Endereço"
+						jsf:value="#{adminCheckoutBean.user.adress}" />
+					<h:message for="adress" style="color:red" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" autofocus="autofocus"
+						jsf:id="card" placeholder="Número do cartão"
+						jsf:value="#{adminCheckoutBean.user.card}" />
+					<h:message for="card" style="color:red" />
+				</div>
+				<button class="buy-button" type="submit"
+					jsf:action="#{adminCheckoutBean.finalize}">Finalizar
+					Compra</button>
+			</form>
+
+		</section>
+	</ui:define>
+</ui:composition>
+
+</html>

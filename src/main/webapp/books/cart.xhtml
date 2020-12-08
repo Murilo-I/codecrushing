@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition template="../template/app_header_nd_footer.xhtml">
+	<ui:define name="body">
+		<section class="infoSection container">
+			<h2 class="infoSection-titulo">Seu carrinho</h2>
+
+			<form class="formularioDoCarrinho" method="post" jsf:id="formCart">
+				<table class="formularioDoCarrinho-tabela">
+					<thead class="formularioDoCarrinho-cabecalho">
+						<tr>
+							<th></th>
+							<th class="formularioDoCarrinho-cabecalho-item">Item</th>
+							<th
+								class="formularioDoCarrinho-cabecalho-item formularioDoCarrinho-cabecalho-preco">Preço</th>
+							<th class="formularioDoCarrinho-cabecalho-item">Qtd</th>
+							<th class="formularioDoCarrinho-cabecalho-item">Total</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="item" value="#{cart.itens}" varStatus="loop">
+							<tr>
+								<td class="formularioDoCarrinho-item"><a
+									href="#{request.contextPath}/books/bookDetail.xhtml?id=#{item.book.id}">
+										<img class="formularioDoCarrinho-item-imagem"
+										src="#{request.contextPath}/system/#{item.book.coverPath}" />
+								</a></td>
+								<td class="formularioDoCarrinho-item">
+									<h2 class="formularioDoCarrinho-item-titulo">
+										#{item.book.title}</h2>
+								</td>
+								<td
+									class="formularioDoCarrinho-item formularioDoCarrinho-item-preco">
+									#{item.book.price}</td>
+								<td class="formularioDoCarrinho-item"><input
+									class="formularioDoCarrinho-item-quantidade" type="number"
+									min="0" jsf:value="#{cart.itens[loop.index].quant}" /></td>
+								<td
+									class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal"
+									title="Preço unitário: R$#{item.book.price}">R$#{cart.getTotal(item)}</td>
+								<td class="formularioDoCarrinho-item"><a
+									jsf:action="#{adminCartBean.remove(item)}"> <img
+										class="formularioDoCarrinho-item-remover-imagem"
+										src="#{request.contextPath}/resources/imagens/trash.png"
+										alt="X" title="Remover" />
+								</a></td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+					<tfoot class="formularioDoCarrinho-rodape">
+						<tr>
+							<td
+								class="formularioDoCarrinho-rodape-item formularioDoCarrinho-finalizar"
+								colspan="3"><a class="formularioDoCarrinho-finalizar-botao"
+								href="#{request.contextPath}/checkout.xhtml"> Finalizar<span
+									class="formularioDoCarrinho-finalizar-botao-texto"
+									role="presentation"> compra</span>
+							</a></td>
+							<td class="formularioDoCarrinho-rodape-item">
+								<button class="formularioDoCarrinho-atualizar" type="submit"
+									jsf:id="btnUpdate">Atualizar</button>
+							</td>
+							<td class="formularioDoCarrinho-rodape-item">R$#{cart.getTotal()}</td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+
+		</section>
+	</ui:define>
+</ui:composition>
+
+</html>

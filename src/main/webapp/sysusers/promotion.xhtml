@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<ui:composition template="../template/admin_header.xhtml">
+		<ui:param name="toPromo" value="active"></ui:param>
+		<ui:define name="body">
+			<h:messages class="alert alert-success" style="list-style:none" globalOnly="true"/>
+			<h:form enctype="multipart/form-data">
+				<div class="form-group">
+					<h:outputLabel value="Título da Promoção" />
+					<h:inputText value="#{adminPromotionBean.promo.title}" required="true"
+						requiredMessage="O título é obrigatório" id="titulo"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="titulo" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Livros"/>
+					<h:selectOneMenu value="#{adminPromotionBean.promo.book.id}" id="livros" 
+							styleClass="form-control" converter="javax.faces.Integer" 
+							required="true" requiredMessage="Um livro deve ser selecionado">
+						<f:selectItems value="#{adminListBean.books}" var="livro" 
+								itemValue="#{livro.id}" itemLabel="#{livro.title}"/>
+					</h:selectOneMenu>
+					<div class="mt-3">
+						<h:message for="livros" class="alert alert-warning" />
+					</div>
+				</div>
+			
+				<h:commandButton value="Cadastrar Promoção" action="{adminPromotionBean.save}"
+					class="form-control btn btn-primary" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</html>

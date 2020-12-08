@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<ui:composition template="../template/admin_header.xhtml">
+		<ui:param name="toForm" value="active"></ui:param>
+		<ui:define name="body">
+			<h:form enctype="multipart/form-data">
+				<div class="form-group">
+					<h:outputLabel value="Título" />
+					<h:inputText value="#{adminBooksBean.book.title}" required="true"
+						requiredMessage="O título é obrigatório" id="titulo"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="titulo" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Descrição" />
+					<h:inputTextarea rows="5" cols="40"
+						value="#{adminBooksBean.book.description}" required="true"
+						requiredMessage="A descrição é obrigatória" id="desc"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="desc" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Número de Páginas" />
+					<h:inputText value="#{adminBooksBean.book.pages}" required="true"
+						requiredMessage="As páginas são obrigatórias" id="paginas"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="paginas" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Preço" />
+					<h:inputText value="#{adminBooksBean.book.price}" required="true"
+						requiredMessage="O preço é obrigatório" id="preço"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="preço" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Autor(es)" />
+					<h:selectManyListbox value="#{adminBooksBean.book.authors}"
+						id="autores" converter="authorConverter" size="5" required="true"
+						requiredMessage="Pelo menos 1 autor deve ser selecionado"
+						styleClass="form-control">
+						<f:selectItems value="#{adminBooksBean.authors}" var="author"
+							itemValue="#{author}" itemLabel="#{author.name}" />
+					</h:selectManyListbox>
+					<div class="mt-3">
+						<h:message for="autores" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Data de Publicação" />
+					<h:inputText value="#{adminBooksBean.book.date}" id="data"
+						styleClass="form-control" />
+					<div class="mt-3">
+						<h:message for="data" class="alert alert-warning" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel value="Capa do livro" />
+					<h:inputFile value="#{adminBooksBean.bookCover}" id="capa"
+						required="true" requiredMessage="Uma imagem deve ser selecionada"
+						styleClass="form-control btn btn-secondary" />
+					<div class="mt-3">
+						<h:message for="capa" class="alert alert-warning" />
+					</div>
+				</div>
+				<h:commandButton value="Cadastrar" action="#{adminBooksBean.save}"
+					class="btn btn-primary" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</html>

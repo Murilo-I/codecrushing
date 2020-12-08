@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<ui:composition template="../template/admin_header.xhtml">
+		<ui:param name="toList" value="active"></ui:param>
+		<ui:define name="body">
+			<h:messages class="alert alert-success" style="list-style:none" />
+			<h:dataTable border="1" var="book" value="#{adminListBean.books}"
+				class="table table-bordered table-striped table-hover">
+				<h:column>
+					<f:facet name="header">Título</f:facet>
+						#{book.title}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Páginas</f:facet>
+						#{book.pages}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Preço</f:facet>
+						#{book.price}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+						#{book.description}
+					</h:column>
+				<h:column>
+					<f:facet name="header">Autor(es)</f:facet>
+					<ui:repeat var="author" value="#{book.authors}">
+							&#8227; #{author.name}
+						</ui:repeat>
+				</h:column>
+				<h:column>
+					<f:facet name="header">livro</f:facet>
+					<a href="#{request.contextPath}/system/#{book.coverPath}"> <img
+						src="#{request.contextPath}/system/#{book.coverPath}"
+						alt="#{book.title}" height="30%" />
+					</a>
+				</h:column>
+			</h:dataTable>
+		</ui:define>
+	</ui:composition>
+
+</html>
